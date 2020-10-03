@@ -5,7 +5,7 @@
 
 const ADD = 'ADD';
 
-const reducer = (state = 0, action) => {
+const counterReducer = (state = 0, action) => {
     switch(action.type) {
         case ADD: 
         return state + 1;
@@ -14,13 +14,39 @@ const reducer = (state = 0, action) => {
     }
 };
 
-const store = Redux.createStore(reducer);
-let count = 0;
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
 
-const addOne = store.suscribe(() => (count += 1))
+const authReducer = (state = {authenticated: false}, action) => {
+  switch(action.type) {
+    case LOGIN:
+      return {
+        authenticated: true
+      }
+    case LOGOUT:
+      return {
+        authenticated: false
+      }
+    default:
+      return state;
+  }
+};
 
-store.dispatch({type: ADD});
-console.log(count);
+const rootReducer = Redux.combineReducers({
+  count: counterReducer,
+  auth: authReducer
+}) 
+// define the root reducer here
 
-store.dispatch({type: ADD})
-console.log(count);
+const store = Redux.createStore(rootReducer);
+
+// const store = Redux.createStore(reducer);
+// let count = 0;
+
+// const addOne = store.suscribe(() => (count += 1))
+
+// store.dispatch({type: ADD});
+// console.log(count);
+
+// store.dispatch({type: ADD})
+// console.log(count);
