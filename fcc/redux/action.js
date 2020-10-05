@@ -1,23 +1,29 @@
-const ADD_NOTE = 'ADD_NOTE';
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
 
-const notesReducer = (state = 'Initial State', action) => {
+const authReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case ADD_NOTE: 
-        return action.text;
+        case LOGIN: 
+            return {authenticated: true}
+
+        case LOGOUT:
+            return {authenticated: false}
 
         default:
-            return state;
+            return defaultState;
     }
 };
 
-const addNoteText = (note) => {
+const store = Redux.createStore(authReducer);
+
+const loginUser = () => {
+    return{
+        type: LOGIN
+    }
+};
+
+const logoutUser = () => {
     return {
-        type: ADD_NOTE, 
-        text: note
+        type: LOGOUT
     }
 };
-
-const store = Redux.createStore(notesReducer);
-
-console.log(store.getState());
-store.dispatch(addNoteText('Hello!'));
