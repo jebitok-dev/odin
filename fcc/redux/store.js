@@ -43,7 +43,7 @@ const store = Redux.createStore(rootReducer);
 // const store = Redux.createStore(reducer);
 // let count = 0;
 
-// const addOne = store.suscribe(() => (count += 1))
+// const addOne = store.subscribe(() => (count += 1))
 
 // store.dispatch({type: ADD});
 // console.log(count);
