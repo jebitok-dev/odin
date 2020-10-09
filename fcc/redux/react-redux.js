@@ -10,11 +10,11 @@ class DisplayMessages extends React.Component {
   handleChange(e) {
     this.setState ({
       input: e.target.value,
-      messages: this.state.messges
+      messages: this.state.messages
     })
   }  
   
-  submitMessage(e) {
+  submitMessage() {
     this.setState ({
       input: '',
       messages: [...this.state.messages, this.state.input]
@@ -32,7 +32,7 @@ class DisplayMessages extends React.Component {
     onChange={this.handleChange.bind(this)} value={this.state.input}
   />
   <button 
-    onChange={this.submitMessage.bind(this)}
+    onClick={this.submitMessage.bind(this)}
   >Submit</button>
   <ul> 
   {this.state.messages.map((x, i)=>{
