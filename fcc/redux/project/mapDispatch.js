@@ -5,13 +5,13 @@ const addMessage = (message) => {
     }
 };
 
-const messageReducer = (previousState = [], action) => {
+const messageReducer = (state = [], action) => {
     switch (action.type) {
         case ADD:
-            return [...previousState, action.message]
+            return [...state, action.message]
 
             default:
-                return previousState;
+                return state;
     }
 }
 
@@ -21,8 +21,8 @@ class Presentational extends React.Component {
         super(props);
         
         this.state= {
-            input: '',
-            messages: []
+            input: ''
+            // messages: []
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,18 +30,15 @@ class Presentational extends React.Component {
        }
 
        handleChange(e) {
-           this.setState((state) => {
+           this.setState({
                input: e.target.value
            })
        }
 
        submitMessage() {
-           this.setState((state) => {
-               const currentMessage = state.input;
-               return {
-                   input: '',
-                   messages: state.messages.concat(currentMessage)
-               }
+           this.props.submitNewMessage(this.state.input)
+           this.setState({
+               input: ''
            });
        }
     render() {
@@ -54,7 +51,7 @@ class Presentational extends React.Component {
                 onChange={this.handleChange}/><br/>
               <button onClick={this.submitMessage}>Submit</button>
               <ul>
-                {this.state.messages.map( (message, idx) => {
+                {this.props.messages.map( (message, idx) => {
                     return (
                        <li key={idx}>{message}</li>
                     )
