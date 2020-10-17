@@ -35,7 +35,7 @@ submitQuote() {
         <input 
     onChange={this.handleChange.bind(this)} value={this.state.input}
   />
-        <button id="new-quote" onClick={this.submitQuote.bind(this)}>New Quote</button>
+        <button id="new-quote" onClick={this.submitQuote.bind(this)}><a>New Quote</a></button>
       </div>
     );
   }
