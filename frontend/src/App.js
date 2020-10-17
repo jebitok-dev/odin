@@ -7,9 +7,23 @@ class App extends React.Component() {
     super(props)
 
   this.state = {
-    Quotes: [],
+    quotes: [],
     author: ''
   }
+}
+
+handleChange(e) {
+  this.setState ({
+    input: e.target.value,
+    quotes: this.state.quotes
+  })
+}  
+
+submitQuote() {
+  this.setState ({
+    quotes: [...this.state.quotes, this.state.input],
+    author: ''
+  })
 }
 
 
@@ -18,7 +32,10 @@ class App extends React.Component() {
       <div className="App" id="quote-box">
         <h1 id="text">Education is the only equalizer</h1>
         <p id="author">Nelson Mandela</p>
-        <a id="new-quote">New Quote</a>
+        <input 
+    onChange={this.handleChange.bind(this)} value={this.state.input}
+  />
+        <button id="new-quote" onClick={this.submitQuote.bind(this)}>New Quote</button>
       </div>
     );
   }
